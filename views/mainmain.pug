@@ -1,0 +1,45 @@
+head
+  title WINITECH
+  link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+  script(src='https://code.jquery.com/jquery-latest.min.js')
+  script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js')
+  script(src='/jquery-serialize-object.min.js')
+  script(src='/js.js')
+  link(rel='stylesheet', href='/main.css')
+body
+  div(align='center', style='margin-top:15%;')
+    img(src='http://www.winitech.com/home/www/images/company/ci_01.jpg')
+    br
+    br
+    if !user
+      form#login-form(action='/auth/login', method='post')
+        input-group
+          label
+            p(style='margin-left:5px')
+              | &#xC774; &#xBA54; &#xC77C;
+              input#email(type='email', name='email', required='', autofocus='')
+        input-group
+          label
+            p
+              | &#xD328;&#xC2A4;&#xC6CC;&#xB4DC;
+              input#password(type='password', name='password', required='')
+          if loginError
+            div(style='margin-left:60px; color:red;')= loginError
+        button(type='submit' style='width:176px; margin-left:51px') &#xB85C;&#xADF8;&#xC778;
+
+    else
+      #username(value=user.id style='font-size:15px; font-family:Nanum Gothic, Arial,Helvetica,sans-serif;')= '안녕하세요! ' + user.name +'님'
+      if errormessage
+        div(style='color:red; font-size:15px; font-family:Nanum Gothic, Arial,Helvetica,sans-serif;')= errormessage
+      div(align='center')
+        form#logout-form(action='/auth/logout', method='get')
+          br
+          button(type='submit', style='width:200px; height:20px') 로그아웃
+        br
+
+        form(action='/main' method='get')
+          button#userpage(type='submit', onclick='', style='width:200px; height:50px;')
+            h1(style='font-family:Nanum Gothic, Arial,Helvetica,sans-serif;font-size:25px;') 사용자
+        form(action='/admin' method='get')
+          button#adminpage(type='submit', onclick='', style='width:200px; height:50px;')
+            h1(style='font-family:Nanum Gothic, Arial,Helvetica,sans-serif;font-size:25px;') 관리자

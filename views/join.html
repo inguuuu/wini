@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WINITECH</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="/jquery-serialize-object.min.js"></script>
+    <script src="/js.js"></script>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <div class="timeline"></div>
+    <form id="join-form" action="/auth/join" method="post">
+        <div class="input-group"><label for="join-email">이메일</label><input id="join-email" type="email" name="email"></div>
+        <div class="input-group"><label for="join-password">패스워드</label><input id="join-password" type="password" name="password"></div>
+        <div class="input-group"><label for="join-name">이름</label><input id="join-name" type="text" name="nick"></div>
+        <div class="input-group"><label for="join-job_title">직급</label><input id="join-job_title" type="text" name="job_title"></div>
+        <div class="input-group"><label for="join-teamname">팀</label><input id="join-teamname" type="text" name="password"></div><button class="btn" id="join-btn" type="submit">회원가입</button></form>
+</body>
+
+</html>

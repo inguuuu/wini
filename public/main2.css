@@ -1,0 +1,264 @@
+@charset "utf-8";
+
+
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption{display:block}
+      @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+      html {overflow-y:scroll}
+      body,ul,li {
+      padding:0;
+      margin:0;
+      border:0;
+      list-style:none;
+      }
+      body {
+      font-size:12px;
+      -webkit-user-select:none;
+      -webkit-text-size-adjust:none;
+      font-family:Nanum Gothic, Arial,Helvetica,sans-serif;
+      color:#5c5c5c;
+      }
+      #wrapperStroll {
+      position:absolute; z-index:1;
+      top:45px; bottom:48px; left:0;
+      width:100%;
+      background:#aaa;
+      overflow:auto;
+      }
+      #scrollerStroll {
+      position:absolute; z-index:1;
+      /*  -webkit-touch-callout:none;*/
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+      width:100%;
+      padding:0;
+      }
+      #scrollerStroll ul {
+      list-style:none;
+      padding:0;
+      margin:0;
+      width:100%;
+      text-align:left;
+      }
+      #scrollerStroll li {
+      padding:0 10px;
+      height:40px;
+      line-height:40px;
+      width:100%;
+      border-bottom:1px solid #ccc;
+      border-top:1px solid #fff;
+      background-color:#fafafa;
+      font-size:14px;
+      }
+      img, a {
+      border:none;
+      }
+      a {
+      color:#5c5c5c;
+      text-decoration:none;
+      }
+      a:hover {
+      color:#697389
+      }
+      h1, h2, h3, h4, h5, h6 {
+      margin:0;
+      font-size:1em;
+      font-weight:inherit;
+      display:inline;
+      font-weight:700;
+      font-size:15px;
+      background:#fff;
+      border-bottom:1px solid #d5d5d5;
+      margin-left:5px;
+      }
+      em {
+      font-weight:bold;
+      font-style:normal;
+      }
+      caption {
+      visibility:hidden;
+      height:0;
+      width:0;
+      font-size:0;
+      line-height:0;
+      overflow:hidden;
+      }
+      table {
+      border-collapse:collapse;
+      border-spacing:0;
+      empty-cells:show;
+      }
+      label > span {
+      display:none;
+      }
+      span {
+      display:inline;
+      }
+      /* btn */
+      button {margin:0 2px 0 3px;}
+      .btn_gray   {padding:0 9px 0 10px;*padding:0 1px;font-family:Nanum Gothic, Arial,Helvetica,sans-serif;font-size:11px;color:#fff;line-height:1.5em;background:#484848;border:1px solid #202020;cursor:pointer;display:inline-block}
+      /* input  */
+      input[type="text"], input[type="password"],input[type="file"],textarea,input[type="search"],input[type="tel"],input[type="url"],input[type="email"],input[type="date"],input[type="time"],input[type="number"] {
+      padding:0 5px;height:19px;text-align:left;background:#fff;border:1px solid #d5d5d5;
+      }
+      input[type="number"] {
+      padding:0 5px;height:19px;background:#fff;text-align:center;border:1px solid #d5d5d5;
+      }
+      select{font-family:Nanum Gothic, Arial,Helvetica,sans-serif;font-size:12px;height:22px}
+      /* board */
+      .board_area {clear:both;overflow:hidden}
+      .board_list {
+      width:100%;
+      table-layout:fixed;
+      background:#f2f2f2;
+      border-top:1px solid #999;
+      }
+      .board_list th {
+      padding:8px 0 9px;
+      border-left:1px solid #d1d1d1;
+      border-bottom:1px solid #d1d1d1;
+      }
+      .board_list th:first-child {
+      border-left:none;
+      }
+      .board_list td {
+      padding:8px 10px 9px 10px;
+      background:#fff;
+      font-weight:normal;
+      word-break:break-all;
+      border-left:1px solid #d1d1d1;
+      border-bottom:1px solid #d1d1d1;
+      }
+      .board_list td.con_l {
+      padding:4px 10px 6px 10px;
+      text-align:left;
+      background:#fff;
+      word-break:break-all;
+      border-left:1px solid #d1d1d1;
+      border-bottom:1px solid #d1d1d1;
+      }
+      .board_list td.con_l span, .board_list td.con_l a {
+      width:100%;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      overflow:hidden;
+      display:block;
+      }
+      .board_list td:first-child {
+      border-left:none;
+      }
+      .board_list td span {
+      display:none
+      }
+      .board_list td * {
+      vertical-align:middle;
+      }
+      /* board */
+      /* board */
+     .cal_board_area {clear:both;overflow:hidden}
+     .cal_list {
+     width:100%;
+     height: 200px;
+     table-layout:fixed;
+     background:#f2f2f2;/*건들지마*/
+     border:1px solid rgb(10, 10, 10); /*건들지마*/
+     }
+     .cal_list th {
+     padding:8px 0 9px;
+     border-left:1px solid #d1d1d1; /*건들지마*/
+     border-bottom:1px solid #d1d1d1;/*건들지마*/
+     }
+     .cal_list th:first-child {
+     border-left:none;
+     }
+     .cal_list td {
+     padding:10px 10px 10px 10px;
+     background:#fcfbfb;/*건들지마*/
+     font-weight:bold;
+     text-align: center;
+     word-break:break-all;
+     border-left:1px solid #d1d1d1;/*건들지마*/
+     border-bottom:1px solid #d1d1d1;/*건들지마*/
+
+     }
+     .cal_list td.con_l {
+     padding:4px 10px 6px 10px;
+     background:rgb(244, 247, 244);
+     word-break:break-all;
+     border-left:1px solid #fdfbfb;
+     border-bottom:1px solid #f8f6f6;
+
+     }
+     .cal_list td.con_l span, cal_list td.con_l a {
+     width:100%;
+     white-space:nowrap;
+     text-overflow:ellipsis;
+     overflow:hidden;
+     display:block;
+     }
+     .cal_list td:first-child {
+     border-left:none;
+     }
+     .cal_list td span {
+     display:none
+     }
+     .cal_list td * {
+     }
+     .lg_Box{
+     margin-top: 20px;
+     height: 200px;
+     display:flex;
+     justify-content: center
+     }
+     .total-thisweek{
+     background: #aaa;
+     height:300px;
+     }
+     .total-nextweek{
+     background: #aaa;
+     height:300px;
+     }
+      /* modal - 팝업존 */
+      .modal{
+      width: 500px; height: 700px; /* 영역설정 */
+      position: fixed; left: 0; top: 0; z-index: 10000;
+      overflow: auto;
+      /* modalBg 위에 보이도록 지정 */
+      /* 가운데 오게 하는 위치는 제이쿼리에서 처리 */
+      }
+      .modalBg{
+      width: 100%; height: 100%; /* 화면을 가득차게 영역설정 */
+      background-color: rgba(172, 208, 238, 0.7); /* 뒤가 보이도록 투명도 조절 */
+      position: fixed; left: 0; top: 0; z-index: 9999;
+      /* 메인 디자인 위에 고정 및 위에 보이도록 지정 */
+      box-sizing: border-box; /* 여백인사이드처리 */
+      }
+  
+      .modal p{
+      width: 100%; height: 30px; /* 영역설정 */
+      text-align: right; /* a태그 오른쪽 정렬 */
+      box-sizing: border-box; /* 여백인사이드처리 */
+      line-height: 30px;
+      /* 줄간격을 높이와 같게 처리해서 세로 가운데 정렬 */
+      padding-right: 10px;
+      background-color: #000000;
+      }
+      .modal a{
+      color: #FFFFFF;
+      }
+      .view_content_order{display:inline-table; width:600px; border:1px solid; margin: 2px;}
+      .view_content_main{display:inline-table; width:315px; border:1px solid; margin: 2px;}
+      .view_total_main{display:inline-table; width:100%; border:1px solid; margin: 2px;}
+      .vbox{
+            overflow: auto;
+      }
+      #username{
+        margin:0px 20px 0px 0px;
+      }
+      #logout_btn{
+        margin:0px 19px 0px 0px;
+      }
+      #t_v_t{
+        margin:20px 0px 0px 0px;
+      }
+      #kkk{
+        margin:0px 0px 20px 0px;
+      }

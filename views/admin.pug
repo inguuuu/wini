@@ -1,0 +1,135 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(charset='EUC-KR')
+
+    title WINITECH
+    link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+    script(src='https://code.jquery.com/jquery-latest.min.js')
+    script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js')
+    script(src='/js2.js')
+    link(rel='stylesheet', href='/main2.css')
+  body
+    // TAB Start
+    #tabs
+      ul
+        li(style='margin-top:10px')
+          a(href='#tabs-thisweek') 업무보고
+        div(style='text-align:right; height:40px;')
+          if !user
+          else
+            form#logout-form(action='/auth/logout', method='get')
+              #username(value=user.id, style='margin-right:20px')= '안녕하세요! ' + user.name +'님'
+              button(type='submit', style='width:100px; float:right') 로그아웃
+            form#home(action='/a', method='get')
+              button#homebutton(type='submit' style='width:100px; float:right') 시작메뉴
+
+          #tabs-thisweek
+      #table_list.board_area
+      <br>
+      <br>
+        // 리스트를 감싸주는 부모 요소
+        .view_content_order(style='width:100%;')
+          table.board_list#view
+            tbody
+              tr
+                th(colspan='1',style='font-size: 18px; background: #aaa;border: 1px solid #444444;border-collapse: collapse;') 작성자
+                th(colspan='4',style='font-size: 18px; background: #aaa;border: 1px solid #444444;border-collapse: collapse;') 금주업무
+                th(colspan='4',style='font-size: 18px; background: #aaa;border: 1px solid #444444;border-collapse: collapse;') 차주업무 계획
+                th(colspan='4',style='font-size: 18px; background: #aaa;border: 1px solid #444444;border-collapse: collapse;') 출장/휴가 계획
+                th(colspan='2',style='font-size: 18px; background: #aaa;border: 1px solid #444444;border-collapse: collapse;') 이슈사항
+            for teaminfo in teaminfos
+              tr
+
+                td(colspan='1',style='font-size: 18px;border: 1px solid #444444;border-collapse: collapse;text-align:center;')= teaminfo
+                td(colspan='4',style='border: 1px solid #444444;border-collapse: collapse;vertical-align:text-bottom;')
+                  - var temp = 1
+                  for businfo in businfos
+                    div.bus_(style="font-weight:bold") ※ #{businfo.bus_name}
+                    p.term_(style="font-weight:bold") 기간 : #{businfo.bus_term}
+                      div.participant(data-bus-id=businfo.id,data-team-name=teaminfo)
+                      div.names
+                      div
+                td(colspan='4',style='border: 1px solid #444444;border-collapse: collapse;vertical-align:text-bottom;')
+                  for businfo in businfos
+                    div.bus__(style="font-weight:bold") ※ #{businfo.bus_name}
+                    p.term__(style="font-weight:bold") 기간 : #{businfo.bus_term}
+                      div.participant1(data-bus-id=businfo.id,data-team-name=teaminfo)
+                      div.names
+                      div
+                td(colspan='4',style='border: 1px solid #444444;border-collapse: collapse;vertical-align:text-bottom;')
+                  div.trip_vac(data-team-name=teaminfo)
+                td(colspan='2',style='border: 1px solid #444444;border-collapse: collapse;vertical-align:text-bottom;')
+
+
+      // 브라우저의 화이트공백때문에 닫는 태그는 붙혀 써야함
+      div
+        button.modalBtn(type='button', style='float:right;') 상세조회
+        button#btnExport(type='button', style='float:right;') Export
+      // 1!!!!!!!!!!!! 여기부터 휴가 및 출장 !!!!!!!!!
+      br
+      br
+      br
+      h3  금주 휴가 및 출장
+      br
+      br
+      br
+      table.cal_list
+        tbody
+          tr
+            td(colspan='1')
+            td(colspan='1')
+              | 월
+            td(colspan='1') 화
+            td(colspan='1')
+              | 수
+            td(colspan='1') 목
+            td(colspan='1')
+              | 금
+          tr
+            td(colspan='1') 휴가
+            td#vacation_mon(colspan='1')
+            td#vacation_thu(colspan='1')
+            td#vacation_wed(colspan='1')
+            td#vacation_thr(colspan='1')
+            td#vacation_fri(colspan='1')
+          tr
+            td(colspan='1') 출장
+            td#trip_mon(colspan='1')
+            td#trip_thu(colspan='1')
+            td#trip_wed(colspan='1')
+            td#trip_thr(colspan='1')
+            td#trip_fri(colspan='1')
+      br
+      br
+
+      h3 휴가-출장-이슈 종합
+
+      table.cal_list
+       tbody
+          tr
+            td(colspan='1') 휴가
+            td(colspan='1') 
+              | 출장
+            td(colspan='1') 이슈
+           
+          tr
+            td#vacation(colspan='1') 
+            td#business_trip(colspan='1')
+            td#issue(colspan='1')
+       
+
+      // 여기부터 상세조회 모달
+      .modalBg
+      // 검은배경
+      .modal
+
+        a.modalCloseBtn(style='float:right; font-size: 14px; color: red') Close X
+        div(id='detail' style='height: 4%; width: 100%; background:#aab ; text-align:center; font-weight:700; font-size: 20px; color:#fff') 상세조회
+        div(style='width: 100%; font-size: 18px; background: #aaa;color:white;') 사업1
+        div#bus1(style='width: 100%;  background: #fff')
+        div(style='width: 100%; font-size: 18px; background: #aaa;color:white;') 사업2
+        div#bus2(style='width: 100%; background: #fff')
+        div(style='width: 100%; font-size: 18px; background: #aaa;color:white;') 사업3
+        div#bus3(style='width: 100%; background: #fff')

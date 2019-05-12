@@ -1,0 +1,264 @@
+doctype html
+html
+  head
+    title WINITECH
+    link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+    script(src='https://code.jquery.com/jquery-latest.min.js')
+    script(src='http://code.jquery.com/ui/1.10.3/jquery-ui.js')
+    script(src='/jquery-serialize-object.min.js')
+    script(src='/js.js')
+    link(rel='stylesheet', href='/main.css')
+  body
+    // TAB Start
+    #tabs
+      ul
+        li(style='margin-top:10px')
+          a(href='#tabs-thisweek') 금주업무
+        li(style='margin-top:10px')
+          a(href='#tabs-nextweek') 차주업무
+        div(style='text-align:right; height:40px;')
+            if !user
+            else
+              form#logout-form(action='/auth/logout', method='get')
+                #username(value=user.id, style='margin-right:20px')= '안녕하세요! ' + user.name +'님'
+                button(type='submit', style='width:100px; float:right') 로그아웃
+              form#home(action='/a', method='get')
+                button#homebutton(type='submit' style='width:100px; float:right') 시작메뉴
+        // 금주업무
+      form#send-form(action='/b', method='get')
+        #tabs-thisweek
+          #bus
+            #business
+              br
+              // List Start
+              #listthisDiv.board_area
+                div(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+                  table.board_list
+                    thead#listthisThTit
+                      tr
+                        th.stasThTit(colspan='1') 사업명
+                        td(colspan='3')
+                          select#buscombo(name='Thisweek[0][0][businessname]', style='width:100%;')
+                            option(value='') 사업을 선택하세요
+                              for businfo in businfos
+                                option(value=businfo.id,data-bus-term=businfo.bus_term)= businfo.bus_name
+                        th(colspan='1') 기간
+                        td(style='text-align:center;font-size:9pt;',colspan='1')
+                        th(colspan='1') 장소
+                        td
+                          select#place(name='Thisweek[0][0][place]', style='width:100%;')
+                            option(value='') 장소 선택
+                            option(value='place1') 본사
+                            option(value='place2') 대구
+                            option(value='place3') 기타
+
+                br
+              // List End
+              #table_list.board_area
+                // 리스트를 감싸주는 부모 요소
+                .view_content_order(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+                  .delbtn(id='', align='right')
+                    button#chk4(onclick='del_list(this)',style='width:75px') close x
+                  table.board_list
+                    tbody
+                      tr
+                        th(colspan='1') 단계
+                        td(colspan='1')
+                          select#search(name='Thisweek[0][1][step]', style='width:100%;')
+                            option(value='') 단계 선택
+                            option(value='step1') 분석
+                            option(value='step2') 설계
+                            option(value='step3') 구축
+                            option(value='step4') 개발
+                            option(value='step5') 기타
+                      tr
+                        th(colspan='2') 업무내용
+                      tr
+                        td(colspan='2')
+                          input#content(type='text', name='Thisweek[0][1][content]', style='width:96%;',placeholder='ex)대구소방 노후장비 교체')
+                      tr
+                        th(colspan='2') 기간
+                      tr
+                        td(colspan='2')
+                          input#term(type='text', name='Thisweek[0][1][term]', style='width:96%;',placeholder='ex)19.01.01~19.12.31')
+                      tr
+                        th(colspan='2') 세부내용
+                      tr
+                        td(id='detail_td',colspan='2')
+                          textarea#detail(name='Thisweek[0][1][detail]', style='width:96%;height:50px;resize: none;',placeholder='오프라인차량동태시스템 무상 유지보수')
+              // 브라우저의 화이트공백때문에 닫는 태그는 붙혀 써야함
+              p
+                button#chk1.btn_gray(type='button', onclick='add_list()') 업무 추가
+                button#chk3.btn_gray(type='button', onclick='delete_business()') 사업 삭제
+                //
+          button#chk2.btn_gray(type='button', onclick='add_business()') 사업 추가
+        // 차주업무
+        #tabs-nextweek
+          #bus2
+            #business
+              br
+              // List Start
+              #listthisDiv.board_area
+                div(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+                  table.board_list
+                    thead#listthisThTit
+                      tr
+                        th.stasThTit(colspan='1') 사업명
+                        td(colspan='3')
+                          select#buscombo(name='Nextweek[0][0][businessname]', style='width:100%;')
+                            option(value='') 사업을 선택하세요
+                              for businfo in businfos
+                                option(value=businfo.id,data-bus-term=businfo.bus_term)= businfo.bus_name
+                        th(colspan='1') 기간
+                        td(style='text-align:center;font-size:9pt;',colspan='1')
+                        th(colspan='1') 장소
+                        td
+                          select#place(name='Nextweek[0][0][place]', style='width:100%;')
+                            option(value='') 장소 선택
+                            option(value='place1') 본사
+                            option(value='place2') 대구
+                            option(value='place3') 기타
+
+                br
+              // List End
+              #table_list.board_area
+                // 리스트를 감싸주는 부모 요소
+                .view_content_order(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+                  .delbtn(id='', align='right')
+                    button#chk4(onclick='del_list(this)',style='width:75px') close x
+                  table.board_list
+                    tbody
+                      tr
+                        th(colspan='1') 단계
+                        td(colspan='1')
+                          select#search(name='Nextweek[0][1][step]', style='width:100%;')
+                            option(value='') 단계 선택
+                            option(value='step1') 분석
+                            option(value='step2') 설계
+                            option(value='step3') 구축
+                            option(value='step4') 개발
+                            option(value='step5') 기타
+                      tr
+                        th(colspan='2') 업무내용
+                      tr
+                        td(colspan='2')
+                          input#content(type='text', name='Nextweek[0][1][content]', style='width:96%;',placeholder='ex)대구소방 노후장비 교체')
+                      tr
+                        th(colspan='2') 기간
+                      tr
+                        td(colspan='2')
+                          input#term(type='text', name='Nextweek[0][1][term]', style='width:96%;',placeholder='ex)19.01.01~19.12.31')
+                      tr
+                        th(colspan='2') 세부내용
+                      tr
+                        td(colspan='2')
+                          textarea#detail(name='Nextweek[0][1][detail]', style='width:96%;height:50px;resize: none;',placeholder='오프라인차량동태시스템 무상 유지보수')
+              // 브라우저의 화이트공백때문에 닫는 태그는 붙혀 써야함
+              p
+                button#nchk1.btn_gray(type='button', onclick='add_list()') 업무 추가
+                button#nchk3.btn_gray(type='button', onclick'delete_business()') 사업 삭제
+                //
+          button#nchk2.btn_gray(type='button', onclick='add_business()') 사업 추가
+        // 휴가추가한부분
+        br
+        br
+        br
+        h3.contentBoxTop 휴가
+        #break
+          #break.board_area
+
+            button#removevacation(type='button',style='width:75px') close x
+            div(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+              table.board_list
+                thead#listthisThTit
+                  tr
+                    th.stasThTit(colspan='1') 종류
+                    td(colspan='3')
+                      select(name='vacation[0][type]', style='width:100%;')
+                        option(value='') 없음
+                        option(value='break1') 연가
+                        option(value='break2') 병가
+                        option(value='break3') 공가
+                        option(value='break4') 특별휴가
+                        option(value='break5') 기타
+                    th(colspan='1') 기간
+                    td(colspan='3')
+
+                      input#vac_start(type='date',name='vacation[0][start_date]')
+                      | ~
+                      input#vac_end(type='date', name='vacation[0][end_date]', min='')
+                tbody#listthisTbTit
+                  tr
+                    th(colspan='1') 사유
+                    td(colspan='7')
+                      textarea(name='vacation[0][reason]', style='width:99%;resize: none;height:50px')
+
+        #field
+          p
+            button#breakAddBtn.btn_gray(type='button',style='float:right') 휴가추가
+        // 여기까지
+        // 출장추가한부분
+        br
+        br
+        br
+        h3.contentBoxTop 출장
+        #bustrip
+          #businessTrip.board_area
+            button#removebustrip(type='button',style='width:75px') close x
+            div(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+              table.board_list
+                thead#listthisThTit
+                  tr
+                    th.stasThTit(colspan='1') 종류
+                    td(colspan='1')
+                      select(name='bustrip[0][type]', style='width:100%;')
+                        option(value='') 없음
+                        option(value='type1') 시내
+                        option(value='type2') 시외
+                        option(value='type3') 해외
+                        option(value='type4') 파견
+                        option(value='type5') 부임
+                        option(value='type6') 기타
+                    th(colspan='1') 장소
+                    td(colspan='1')
+                      select(name='bustrip[0][place]', style='width:100%;')
+                        option(value='place1') 대구
+                        option(value='place2') 서울
+                        option(value='place3') 부산
+                        option(value='place4') 기타
+                    th(colspan='1') 기간
+                    td(colspan='3')
+                      input#trip_start(type='date', name='bustrip[0][start_date]')
+                      | ~
+                      input#trip_end(type='date', name='bustrip[0][end_date]',min='')
+                tbody#listthisTbTit
+                  tr
+                    th(colspan='1') 사유
+                    td(colspan='7')
+                      textarea(name='bustrip[0][reason]', style='width:99%;resize: none;height:50px')
+            br
+        #field1
+          p
+           button#businessTripAddBtn.btn_gray(type='button',style='float:right') 출장추가
+        // 여기까지
+        // 이슈추가한부분
+        br
+        br
+        br
+        h3#iss.contentBoxTop 이슈
+        br
+        br
+        #issue.board_area
+          div(style='float:left; overflow:auto; overflow-x:hidden; overflow-y:hidden;')
+            table.board_list
+              tbody#listthisTbTit
+                tr
+                  th(colspan='1') 상세내용
+                  td(colspan='7')
+                    textarea(name='issue', style='width:99%;resize: none;height:50px;')
+          br
+          br
+          br
+          br
+        // 여기까지
+        button#send(type='submit',style='float:right') 주간보고서 제출
